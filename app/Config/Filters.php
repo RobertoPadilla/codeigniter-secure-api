@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\AdminAuthenticationFilter;
 use App\Filters\JWTAuthenticationFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
@@ -25,6 +26,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'auth' => JWTAuthenticationFilter::class,
+        'admin-auth' => AdminAuthenticationFilter::class,
     ];
 
     /**

@@ -14,12 +14,24 @@ function getJWTFromRequest($authenticationHeader): string
     return explode(' ', $authenticationHeader)[1];
 }
 
-function validateJWTFromRequest(string $encodedToken)
+function decodeToken($encodedToken)
 {
     $key = Services::getSecretKey();
-    $decodedToken = JWT::decode($encodedToken, new Key($key, 'HS256'));
+    return JWT::decode($encodedToken, new Key($key, 'HS256'));
+}
+
+function validateUserJWTFromRequest(string $encodedToken)
+{
+    $decodedToken = decodeToken($encodedToken);
     $userModel = new UserModel();
     $userModel->findUserByEmailAdress($decodedToken->email);
+}
+
+function validateAdminJWTFromRequest(string $encodedToken)
+{
+    $decodedToken = decodeToken($encodedToken);
+    $userModel = new UserModel();
+    return $userModel->isAdminByEmail($decodedToken->email);
 }
 
 function getSignedJWTForUser(string $email): string

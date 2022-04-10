@@ -32,6 +32,11 @@ class AddUser extends Migration
                 'null' => false,
                 'unique' => true
             ],
+            'is_admin' => [
+                'type' => 'BOOLEAN',
+                'null' => false,
+                'default' => false
+            ],
             'updated_at' => [
                 'type' => 'datetime',
                 'null' => true,

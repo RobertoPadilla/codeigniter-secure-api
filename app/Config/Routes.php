@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->resource('clients');
+$routes->post('/auth/register', 'Auth::register', ['filter' => 'admin-auth']);
 
 //$routes->get('client', 'Client::index');
 //$routes->post('client', 'Client::store');

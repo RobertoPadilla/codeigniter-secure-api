@@ -65,4 +65,13 @@ class UserModel extends Model
 
         return $user;
     }
+
+    public function isAdminByEmail(string $emailAdress) {
+        $user = $this->asArray()->where(['email' => $emailAdress])->first();
+
+        if (!$user) {
+            throw new \Exception('User does not exist for specified email address');
+        }
+        return $user['is_admin'];
+    }
 }
